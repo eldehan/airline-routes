@@ -1,8 +1,8 @@
 const Table = ({ className, columns, rows, format }) => {
   const dataRows = rows.slice().map(row => {
     const cells = columns.map(col => {
-      const value = row[col.property]
-      return <td key={`${col.property}: ${value}`}>{format(col.property, value)}</td>
+      const cellData = row[col.property]
+      return <td key={`${col.property}: ${cellData}`}>{format(col.property, cellData)}</td>
     })
     return <tr key={Object.values(row).join(':')}>{cells}</tr>
   })
