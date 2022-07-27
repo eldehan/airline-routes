@@ -37,6 +37,9 @@ const App = () => {
           format={formatData}
         />
       </section>
+      <footer>
+        <br />
+      </footer>
     </div>
   )
 }
