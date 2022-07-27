@@ -1394,13 +1394,13 @@ const airports = [
   { "code": "BGG", "name": "Bingöl Airport", "lat": 38.861111, "long": 40.5925 },
 ];
 
-const getAirlineById = (id) => {
+export const getAirlineById = (id) => {
   const airline = airlines.find(airline => airline.id === id)
 
   return airline.name
 }
 
-const getAirportByCode = (code) => {
+export const getAirportByCode = (code) => {
   const airport = airports.find(airport => airport.code === code)
 
   return airport.name
@@ -1410,6 +1410,4 @@ export default {
   routes,
   airlines,
   airports,
-  getAirlineById,
-  getAirportByCode
 };
