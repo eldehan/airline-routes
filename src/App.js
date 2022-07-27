@@ -4,7 +4,7 @@ import './App.css';
 
 const App = () => {
   const { routes } = DATA
-  console.log(routes)
+  const { getAirlineById, getAirportByCode } = DATA
 
   return (
     <div className="app">
@@ -17,12 +17,17 @@ const App = () => {
         </p>
         <table>
           <tbody>
+            <tr>
+              <th>Airline</th>
+              <th>Source Airport</th>
+              <th>Destination Airport</th>
+            </tr>
             {routes.map((route, index) => {
               return (
                 <tr key={index}>
-                  <td>{route.airline}</td>
-                  <td>{route.src}</td>
-                  <td>{route.dest}</td>
+                  <td>{getAirlineById(route.airline)}</td>
+                  <td>{getAirportByCode(route.src)}</td>
+                  <td>{getAirportByCode(route.dest)}</td>
                 </tr>
               )
             })}
