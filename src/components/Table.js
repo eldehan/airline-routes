@@ -48,6 +48,7 @@ const Table = ({ className, columns, rows, format }) => {
         options={perPageOptions}
         handleOnChange={perPageOnChange}
         optionsState={resultsPerPage}
+        enabledKey={undefined}
       />
       <p>Showing {pageStart}-{pageEnd} routes of {rows.length} total routes</p>
       <table className={className}>

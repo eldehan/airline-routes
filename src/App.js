@@ -53,6 +53,45 @@ const App = () => {
       }
     })]
 
+  const filteredAirlineOptions = airlineOptions.map(airlineOption => {
+    let active = !!routes.find(
+      (route) => route.airline === airlineOption.value
+    );
+
+    if (airlineOption.value === 'all') {
+      active = true
+    }
+
+    return {
+      ...airlineOption,
+      active
+    }
+  })
+
+  const airportOptions = [
+    { value: 'all', text: 'all', },
+    ...airports.map(airport => {
+      return {
+        value: airport.code,
+        text: airport.name
+      }
+    })]
+
+  const filteredAirportOptions = airportOptions.map(airportOption => {
+    let active = !!routes.find(
+      (route) => route.src === airportOption.value || route.dest === airportOption.value
+    );
+
+    if (airportOption.value === 'all') {
+      active = true
+    }
+
+    return {
+      ...airportOption,
+      active
+    }
+  })
+
   const handleSelectAirline = (event) => {
     let selection = event.target.value
     if (selection === 'all') {
@@ -60,17 +99,7 @@ const App = () => {
     } else {
       dispatch(setAirlineFilter(Number(selection)));
     }
-    // event.preventDefault();
   };
-
-  const airportOptions = [
-    { value: 'all', text: 'all' },
-    ...airports.map(airport => {
-      return {
-        value: airport.code,
-        text: airport.name
-      }
-    })]
 
   const handleSelectAirport = (event) => {
     let selection = event.target.value
@@ -79,8 +108,13 @@ const App = () => {
     } else {
       dispatch(setAirportFilter(selection));
     }
-    // event.preventDefault();
   };
+
+  const handleShowAllRoutes = (event) => {
+    event.preventDefault()
+    dispatch(clearFilters())
+    event.target.parentElement.reset()
+  }
 
   return (
     <div className="app">
@@ -91,18 +125,23 @@ const App = () => {
         <p>
           Welcome to the app!
         </p>
-        <Select
-          label={'Filter routes by airline'}
-          name={'select-airlines'}
-          options={airlineOptions}
-          handleOnChange={handleSelectAirline}
-        />
-        <Select
-          label={'Filter routes by airport'}
-          name={'select-airport'}
-          options={airportOptions}
-          handleOnChange={handleSelectAirport}
-        />
+        <form>
+          <Select
+            label='Filter routes by airline'
+            name='select-airlines'
+            options={filteredAirlineOptions}
+            handleOnChange={handleSelectAirline}
+            enabledKey='active'
+          />
+          <Select
+            label={'Filter routes by airport'}
+            name={'select-airport'}
+            options={filteredAirportOptions}
+            handleOnChange={handleSelectAirport}
+            enabledKey='active'
+          />
+          <button onClick={handleShowAllRoutes}>Show All Routes</button>
+        </form>
         <Table
           className="routes-table"
           columns={columns}
