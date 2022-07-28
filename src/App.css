@@ -70,3 +70,12 @@ svg circle.source {
   fill: lightgreen;
   r: 0.5;
 }
+
+.routes-table-options {
+  font-size: 0.9em;
+}
+
+.routes-table-options-description {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}

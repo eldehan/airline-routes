@@ -1,12 +1,13 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import DATA from './data'
 import { getAirlineById, getAirportByCode } from "./data"
 import './App.css';
+import { setAirlineFilter, setAirportFilter, clearFilters } from "./reducers/filterReducer";
 import Table from './components/Table';
 import Select from './components/Select';
-import { setAirlineFilter, setAirportFilter, clearFilters } from "./reducers/filterReducer";
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import Map from './components/Map';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -38,14 +39,14 @@ const App = () => {
 
   const formatData = (property, value) => {
     if (property === 'airline') {
-      return getAirlineById(value)
+      return getAirlineById(value).name
     } else {
-      return getAirportByCode(value)
+      return getAirportByCode(value).name
     }
   }
 
   const airlineOptions = [
-    { value: 'all', text: 'all' },
+    { value: 'all', text: 'all airlines' },
     ...airlines.map(airline => {
       return {
         value: airline.id,
@@ -69,7 +70,7 @@ const App = () => {
   })
 
   const airportOptions = [
-    { value: 'all', text: 'all', },
+    { value: 'all', text: 'all airports', },
     ...airports.map(airport => {
       return {
         value: airport.code,
@@ -122,19 +123,17 @@ const App = () => {
         <h1 className="title">Airline Routes</h1>
       </header>
       <section>
-        <p>
-          Welcome to the app!
-        </p>
+        <Map routes={routes} />
         <form>
           <Select
-            label='Filter routes by airline'
+            label='Filter routes by'
             name='select-airlines'
             options={filteredAirlineOptions}
             handleOnChange={handleSelectAirline}
             enabledKey='active'
           />
           <Select
-            label={'Filter routes by airport'}
+            label={'Filter routes by'}
             name={'select-airport'}
             options={filteredAirportOptions}
             handleOnChange={handleSelectAirport}
@@ -142,6 +141,7 @@ const App = () => {
           />
           <button onClick={handleShowAllRoutes}>Show All Routes</button>
         </form>
+        <br />
         <Table
           className="routes-table"
           columns={columns}

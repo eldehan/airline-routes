@@ -41,16 +41,18 @@ const Table = ({ className, columns, rows, format }) => {
   const headerRow = <tr>{columns.map(col => <th key={col.name}>{col.name}</th>)}</tr>
 
   return (
-    <div>
-      <Select
-        label={'Results to show per page'}
-        name={'select-per-page'}
-        options={perPageOptions}
-        handleOnChange={perPageOnChange}
-        optionsState={resultsPerPage}
-        enabledKey={undefined}
-      />
-      <p>Showing {pageStart}-{pageEnd} routes of {rows.length} total routes</p>
+    <>
+      <div className={className + '-options'}>
+        <Select
+          label={'Results to show per page'}
+          name={'select-per-page'}
+          options={perPageOptions}
+          handleOnChange={perPageOnChange}
+          optionsState={resultsPerPage}
+          enabledKey={undefined}
+        />
+        <p className={className + '-options-description'}>Showing {pageStart}-{pageEnd} routes of {rows.length} total routes</p>
+      </div>
       <table className={className}>
         <thead>
           {headerRow}
@@ -61,7 +63,7 @@ const Table = ({ className, columns, rows, format }) => {
       </table>
       <button onClick={gotoPreviousPage} disabled={page === 0}>Previous Page</button>
       <button onClick={gotoNextPage} disabled={pageEnd >= rows.length}>Next Page</button>
-    </div>
+    </>
   )
 }
 
