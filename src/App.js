@@ -15,7 +15,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(clearFilters())
-  }, [])
+  }, [dispatch])
 
   const routes = useSelector((state) => {
     let routes = state.routes

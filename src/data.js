@@ -1406,8 +1406,10 @@ export const getAirportByCode = (code) => {
   return airport
 }
 
-export default {
+const data = {
   routes,
   airlines,
   airports,
-};
+}
+
+export default data
