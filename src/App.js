@@ -24,27 +24,27 @@ const App = () => {
     }
   }
 
-  const Select = ({ label, name, options, handleOnChange, optionsState }) => (
-    <div>
-      <label htmlFor={name}>{label}</label>
-      <select name={name} onChange={handleOnChange} value={optionsState}>
-        {options.map(opt => {
-          return <option key={name + opt.value} value={opt.value}>{opt.text}</option>
-        })}
-      </select>
-    </div>
-  )
+  // const Select = ({ label, name, options, handleOnChange, optionsState }) => (
+  //   <div>
+  //     <label htmlFor={name}>{label}</label>
+  //     <select name={name} onChange={handleOnChange} value={optionsState}>
+  //       {options.map(opt => {
+  //         return <option key={name + opt.value} value={opt.value}>{opt.text}</option>
+  //       })}
+  //     </select>
+  //   </div>
+  // )
 
-  const perPageOptions = [
-    { value: 25, text: '25' },
-    { value: 50, text: '50' },
-    { value: 75, text: '75' },
-    { value: 100, text: '100' }
-  ]
+  // const perPageOptions = [
+  //   { value: 25, text: '25' },
+  //   { value: 50, text: '50' },
+  //   { value: 75, text: '75' },
+  //   { value: 100, text: '100' }
+  // ]
 
-  const perPageOnChange = (event) => {
-    setResultsPerPage(event.target.value)
-  }
+  // const perPageOnChange = (event) => {
+  //   setResultsPerPage(event.target.value)
+  // }
 
   return (
     <div className="app">
@@ -55,19 +55,18 @@ const App = () => {
         <p>
           Welcome to the app!
         </p>
-        <Select
+        {/* <Select
           label={'Results to show per page'}
           name={'select-per-page'}
           options={perPageOptions}
           handleOnChange={perPageOnChange}
           optionsState={resultsPerPage}
-        />
+        /> */}
         <Table
           className="routes-table"
           columns={columns}
           rows={routes}
           format={formatData}
-          resultsPerPage={Number(resultsPerPage)}
         />
       </section>
       <footer>
