@@ -1,17 +1,19 @@
 import { useState } from "react"
 
-const Table = ({ className, columns, rows, format }) => {
+const Table = ({ className, columns, rows, format, resultsPerPage }) => {
   const [page, setPage] = useState(0)
-  const resultsPerPage = 25
   const pageStart = page * resultsPerPage
   const pageEnd = pageStart + resultsPerPage
 
+
   const nextPage = () => {
     setPage(page + 1);
+    window.scrollTo(0, 0)
   };
 
   const previousPage = () => {
     setPage(page - 1);
+    window.scrollTo(0, 0)
   };
 
   const dataRows = rows.slice(pageStart, pageEnd).map(row => {
