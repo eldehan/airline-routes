@@ -18,9 +18,12 @@ const paginationSlice = createSlice({
     },
     setResultsPerPage(state, action) {
       state.resultsPerPage = action.payload
+    },
+    resetPageStart(state, action) {
+      state.pageStart = action.payload
     }
   }
 })
 
-export const { nextPage, previousPage, setResultsPerPage } = paginationSlice.actions
+export const { nextPage, previousPage, setResultsPerPage, resetPageStart } = paginationSlice.actions
 export default paginationSlice.reducer

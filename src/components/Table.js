@@ -1,10 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { nextPage, previousPage, setResultsPerPage } from '../reducers/paginationReducer'
+import { nextPage, previousPage, setResultsPerPage, resetPageStart } from '../reducers/paginationReducer'
 import Select from "./Select"
 
 const Table = ({ className, columns, rows, format }) => {
   const dispatch = useDispatch()
   const { page, pageStart, resultsPerPage } = useSelector(state => state.pages)
+  if (pageStart + resultsPerPage >= rows.length) {
+    let newStart = pageStart
+    while (newStart >= rows.length) {
+      newStart -= resultsPerPage
+    }
+
+    dispatch(resetPageStart(newStart))
+  }
+
   const pageEnd = (pageStart + resultsPerPage) <= rows.length
     ? pageStart + resultsPerPage
     : rows.length
